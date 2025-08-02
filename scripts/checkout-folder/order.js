@@ -2,7 +2,7 @@ import { cart, deleteProduct, updateDeliveryOption } from '../../data/cart.js';
 import { products } from '../../data/products.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOptions} from '../../data/delivery.js'
-
+import { renderPaymentSummary } from './payment.js';
 
 
 
@@ -125,6 +125,7 @@ export function renderOrderSummary() {
         updateDeliveryOption(productId, deliveryOptionId);
 
         renderOrderSummary();
+        renderPaymentSummary();
       })
   })
 
@@ -137,6 +138,8 @@ export function renderOrderSummary() {
       const containerElement = document.querySelector(`.js-cart-item-container-${id}`)
 
       containerElement.remove()
+
+      renderPaymentSummary();
 
     })
 
