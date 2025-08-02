@@ -1,4 +1,4 @@
-import { cart, deleteProduct } from '../data/cart.js';
+import { cart, deleteProduct, updateDeliveryOption } from '../data/cart.js';
 import { products } from '../data/products.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOptions} from '../data/delivery.js'
@@ -88,7 +88,11 @@ function doDeliveryPrice(matchingProduct, cartItem) {
     const isChecked = option.id === cartItem.deliveryOptionId
 
     deliveryHTML += `
-      <div class="delivery-option">
+      <div 
+        class="delivery-option js-delivery-option" 
+        data-product-id="${matchingProduct.id}" 
+        data-delivery-option-id="${option.id}">
+
         <input type="radio" ${isChecked ? 'checked' : ''}
           class="delivery-option-input"
           name="delivery-option-${matchingProduct.id}">
@@ -108,8 +112,19 @@ function doDeliveryPrice(matchingProduct, cartItem) {
 
 
 
-
 document.querySelector('.js-order-summary').innerHTML = itemContainerHTML
+
+
+const options = document.querySelectorAll('.js-delivery-option')
+
+options.forEach((option) => {
+    option.addEventListener('click', () => {
+      const productId = option.dataset.productId;
+      const deliveryOptionId = option.dataset.deliveryOptionId;
+
+      updateDeliveryOption(productId, deliveryOptionId);
+    })
+})
 
 document.querySelectorAll('.js-delete-link').forEach((button) => {
   button.addEventListener('click', () => {
@@ -124,3 +139,4 @@ document.querySelectorAll('.js-delete-link').forEach((button) => {
   })
 
 })
+
