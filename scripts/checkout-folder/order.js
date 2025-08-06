@@ -6,7 +6,7 @@ import { renderPaymentSummary } from './payment.js';
 
 
 
-export function renderOrderSummary() {
+export function renderOrderSummary(products) {
   let itemContainerHTML = ``
 
 
@@ -14,6 +14,7 @@ export function renderOrderSummary() {
     let productId = item.id
 
     const matchingProduct = products.find((item) => item.id === productId)
+    
 
     const productImage = matchingProduct.image
     const productPrice = matchingProduct.priceCents
@@ -146,5 +147,3 @@ export function renderOrderSummary() {
   })
 
 }
-
-renderOrderSummary();

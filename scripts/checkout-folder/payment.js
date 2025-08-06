@@ -1,8 +1,7 @@
 import { cart } from "../../data/cart.js";
-import { products } from "../../data/products.js";
 import { deliveryOptions } from "../../data/delivery.js";
 
-export function renderPaymentSummary() {
+export function renderPaymentSummary(products) {
     let totalPrice = 0;
     let shippingPrice = 0;
 
